@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poy Games</title>
-    <link rel="shortcut icon" type="image/x-icon" href="poygame.netlify.app/favicon.ico">
-
+    <title>PoyreGames</title>
+    <link rel="icon" href="https://files.catbox.moe/td7os6.jpg" type="image/png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SZN69N4SEF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SZN69N4SEF');
+    </script>
     <style>
-         {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            background: url('https://files.catbox.moe/d3li0w.avif') no-repeat center center fixed;
+            background: url('https://files.catbox.moe/uer54d.jpg') no-repeat center center fixed;
             background-size: cover;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -23,124 +29,403 @@
             font-family: Arial, sans-serif;
             opacity: 0;
             animation: fadeIn 1s ease-in forwards;
-            overflow: hidden;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        .coolBlobIdk {
+            position: fixed;
+            bottom: -30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(50, 50, 50, 0.8), rgba(200, 200, 200, 0.6));
+            border-radius: 50%;
+            filter: blur(100px);
+            box-shadow: 0 0 120px rgba(200, 200, 200, 0.5);
+        }
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
         .title {
-            margin-top: 50px;
+            margin-top: 100px;
             font-size: 48px;
             font-weight: bold;
             text-transform: lowercase;
             color: white;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
             text-align: center;
+            transition: transform 0.3s ease-in-out;
         }
-        .search-container {
-            margin-top: 100px;
-            width: 60%;
-            height: 50px;
-            background: black;
-            border: 2px solid white;
-            border-radius: 20px;
+        .title:hover {
+            transform: scale(1.2);
+        }
+        .icons {
             display: flex;
-            align-items: center;
-            padding: 0 15px;
-        }
-        .search-bar {
-            width: 100%;
-            background: transparent;
-            border: 3px blue;
-            outline: none;
-            color: white;
-            font-size: 15px;
-        }
-        .icons-container {
-            margin-top: 50px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            justify-items: center;
+            gap: 10px;
+            margin-top: 10px;
         }
         .icon-container {
-            width: 100px;
-            height: 120px;
-            background: black;
-            border: 3px blue;
-            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+            background-color: black;
+            border-radius: 15px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            transition: transform 0.3s ease-in-out;
+            justify-content: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 0 10px white;
         }
         .icon-container:hover {
             transform: scale(1.2);
+            box-shadow: 0 0 20px white;
         }
         .icon {
-            width: 60px;
-            height: 60px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             cursor: pointer;
         }
-        .icon-label {
-            margin-top: 5px;
-            font-size: 14px;
-            color: white;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        .rectangle-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
         }
-        .support-text {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
+        .rectangle {
+            width: 400px;
+            height: 250px;
+            background-color: black;
+            border-radius: 15px;
+            box-shadow: 0 0 20px white;
+            position: relative;
+            overflow: hidden;
             cursor: pointer;
+            transition: transform 0.3s ease-in-out;
         }
-        .update-text {
+        .rectangle:hover {
+            transform: scale(1.05);
+        }
+        .rectangle img {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            transition: filter 0.3s ease-in-out;
+        }
+        .rectangle:hover img {
+            filter: blur(5px) brightness(0.5);
+        }
+        .game-name {
             position: absolute;
-            bottom: 20px;
+            top: 20px;
             left: 20px;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
             color: white;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 5px 10px;
-            border-radius: 5px;
+            text-align: left;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+            text-transform: lowercase;
+        }
+        .rectangle:hover .game-name {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
+    <div class="coolBlobIdk"></div>
     <div class="title">PoyreGames</div>
-
-    <div class="search-container">
-        <input type="text" class="search-bar" placeholder="Welcome To PoyGames..." onkeydown="handleSearch(event)">
+	  <div class="search-container">
+        <input type="text" class="search-bar" placeholder="search... (built in bing proxy)" onkeydown="handleSearch(event)">
+    </div>
+    <div class="icons">
+        <a href="https://poygame.netlify.app/a.html" target="_blank" class="icon-container"><img src="https://files.catbox.moe/ao6qv3.png" alt="Tools" class="icon"></a>
+ 
+    </div>
+    <div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/subway-surfers.html', '_blank')">
+        <img src="https://files.catbox.moe/nlz4zw.jpeg" alt="subway surfers">
+        <div class="game-name">subway surfers</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/minecraft.html', '_blank')">
+        <img src="https://gaming-cdn.com/images/news/articles/7191/cover/minecraft-gets-a-new-artwork-cover66856ea7d02ad.jpg" alt="minecraft">
+        <div class="game-name">minecraft</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/block-blast.html', '_blank')">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDbz7CYwoe4wulDfOJ5Z5sUZOCiX0QfzRhqQ&s" alt="block blast">
+        <div class="game-name">block blast</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/fruit-ninja.html', '_blank')">
+        <img src="https://preteen-ministry.net/cdn/shop/products/Fruit_Ninja_-_Cover_1024x.jpg?v=1507262323" alt="Fruit Ninja">
+        <div class="game-name">Fruit Ninja</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/crossy-road.html', '_blank')">
+        <img src="https://static1.squarespace.com/static/5e3bb512203ccf3516032e33/t/616f889f61fabc726422fa0c/1634699424702/CR_AndroidTV_01.png" alt="Crossy Road">
+        <div class="game-name">Crossy Road</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/monkey-mart.html', '_blank')">
+        <img src="https://files.catbox.moe/xfim7j.jpeg" alt="Monkey Mart">
+        <div class="game-name">Monkey Mart</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/lazy-jump-3d.html', '_blank')">
+        <img src="https://play-lh.googleusercontent.com/49tmTkafs_EYS--F6LA83IsiTGqjwhfayLuNACFlMM-EDhOJO4ijMa_3jhWl9aee4Q" alt="Lazy Jump 3D">
+        <div class="game-name">Lazy Jump 3D</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/bubble-shooter.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/npfxxsxj_ho/maxresdefault.jpg" alt="Bubble Shooter">
+        <div class="game-name">Bubble Shooter</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/stair-race-3d.html', '_blank')">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0jI9UiKYmsYw6malhXwMKmrZLb8lf-ni4WqhhIdXbBXqa3h3hnGeUYiWrIoVIHCWPkkaRcCZxXc__3ULMJwLVy-OeVZEdfjr00AX2Dig3qEKDeDD2huF9w8Bf_ial889CrhLh9fs60_5tnEKRbUyr_AxKytDnUElO9gKFI591cKKigI-t8WP1VY7NCQ/w1280-h720-p-k-no-nu/Stair%20Race%203D%20.jpg" alt="Stair Race 3D">
+        <div class="game-name">Stair Race 3D</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/granny-offline.html', '_blank')">
+        <img src="https://files.catbox.moe/k11vfr.webp" alt="Granny Offline">
+        <div class="game-name">Granny Offline</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/granny-2.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/M2oAjzvjljw/maxresdefault.jpg" alt="Granny 2">
+        <div class="game-name">Granny 2</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/baldis-basics.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/EmyYCa_BC9s/maxresdefault.jpg" alt="Baldi's Basics">
+        <div class="game-name">Baldi's Basics</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/1v1-lol.html', '_blank')">
+        <img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs2/200042732/original/024f8a22e06d58c1eed316a539687253e49625c1/ill-edit-your-1v1-lol-videos-and-give-you-thumbnails.jpg" alt="1v1 LOL">
+        <div class="game-name">1v1 LOL</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/paper-io-2.html', '_blank')">
+        <img src="https://files.catbox.moe/6mkaql.jpeg" alt="Paper Io 2">
+        <div class="game-name">Paper Io 2</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/super-hot.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/bkzwi0Y-mWk/maxresdefault.jpg" alt="Super Hot">
+        <div class="game-name">Super Hot</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/basket-random.html', '_blank')">
+        <img src="https://play-lh.googleusercontent.com/6AN9KKe5M9udzoQA1J00dc6po5dNY9JInI_ewDKcPXocPjEHWTqJV0d2CwSWxYRhTh4=w526-h296-rw" alt="Basket Random">
+        <div class="game-name">Basket Random</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/drift-hunters.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/xjdLbUxmV_o/maxresdefault.jpg" alt="Drift Hunters">
+        <div class="game-name">Drift Hunters</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/drift-boss.html', '_blank')">
+        <img src="https://files.catbox.moe/jsm5jl.jpeg" alt="Drift Boss">
+        <div class="game-name">Drift Boss</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/roblox-only-up.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/iWQTsM7fbkg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCHSqTpwti_EaS_Aj1PQJc84C5qqA" alt="Roblox Only Up">
+        <div class="game-name">Roblox Only Up</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/minecraft-parkour.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/zuyYcuDpCxs/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBH8p_cirtAcNNcst20Om5JkP2o6w" alt="Minecraft Parkour">
+        <div class="game-name">Minecraft Parkour</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/drive-mad.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/Bx3bt6HnOSs/hq720.jpg?sqp=-oaymwExCK4FEIIDSFryq4qpAyMIARUAAIhCGAHwAQH4Ab4HgALQBYoCDAgAEAEYMiBnKHIwDw==&rs=AOn4CLBvQgoYjUrnam3ck28CT-S_vlX_mQ" alt="Drive Mad">
+        <div class="game-name">Drive Mad</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/shell-shockers.html', '_blank')">
+        <img src="https://staticg.sportskeeda.com/editor/2024/10/783ff-17280361172197-1920.jpg?w=640" alt="Shell Shockers">
+        <div class="game-name">Shell Shockers</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/ultimate-driving-simulator.html', '_blank')">
+        <img src="https://files.catbox.moe/lnxk6l.jpeg" alt="Ultimate Driving Simulator">
+        <div class="game-name">Ultimate Driving Simulator</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/hole-io.html', '_blank')">
+        <img src="https://lh3.googleusercontent.com/kdoWsI9fctfXqwInmRRn57jqohctanZvPrGIQIPxh-JPcMlK-U2Q3WgOJV2uHj0io1avUi2UTE_7mfFsjqjgT9xI=s1280-w1280-h800" alt="Hole.io">
+        <div class="game-name">Hole.io</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/geometry-dash.html', '_blank')">
+        <img src="https://images3.alphacoders.com/120/thumb-1920-1202615.jpg" alt="Geometry Dash">
+        <div class="game-name">Geometry Dash</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/basketball-stars.html', '_blank')">
+        <img src="https://play-lh.googleusercontent.com/WReGOclxXI481lMXvvAP8VGxSywci4vy-KmrZLKDeVO0ewmCZPzRzbAIVls-qwFzEw=w526-h296-rw" alt="Basketball Stars">
+        <div class="game-name">Basketball Stars</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/slither-io.html', '_blank')">
+        <img src="https://files.catbox.moe/jz2zkq.png" alt="Slither.io">
+        <div class="game-name">Slither.io</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/snowball-io.html', '_blank')">
+        <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8b/29/7c/8b297c9a-14ee-8271-5615-4b96f1838b6d/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/1200x600wa.png" alt="Snowball.io">
+        <div class="game-name">Snowball.io</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/retro-bowl.html', '_blank')">
+        <img src="https://files.catbox.moe/0k3fg4.png" alt="Retro Bowl">
+        <div class="game-name">Retro Bowl</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/just-fall-io.html', '_blank')">
+        <img src="https://files.catbox.moe/zw4hua.png" alt="Just Fall.io">
+        <div class="game-name">Just Fall.io</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/gladihoppers.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/_kuLMGMoGAY/maxresdefault.jpg" alt="Gladihoppers">
+        <div class="game-name">Gladihoppers</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/ragdoll-io.html', '_blank')">
+        <img src="https://files.catbox.moe/2vqace.png" alt="Ragdoll.io">
+        <div class="game-name">Ragdoll.io</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/temple-run-2.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/9aK2zoFBbKY/maxresdefault.jpg" alt="Temple Run 2">
+        <div class="game-name">Temple Run 2</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/stickman-hook.html', '_blank')">
+        <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ae/ed/22/aeed22b9-6b86-34ef-7464-af1657d2d5f7/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/1200x600wa.png" alt="Stickman Hook">
+        <div class="game-name">Stickman Hook</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/flappy-bird.html', '_blank')">
+        <img src="https://mir-s3-cdn-cf.behance.net/projects/404/c4b80d143006427.Y3JvcCw4NjksNjgwLDI1LDA.png" alt="Flappy Bird">
+        <div class="game-name">Flappy Bird</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/minecraft-shooter.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/k_wBPps8fMA/maxresdefault.jpg" alt="Minecraft Shooter">
+        <div class="game-name">Minecraft Shooter</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/helix-jump.html', '_blank')">
+        <img src="https://files.catbox.moe/64wqaw.png" alt="Helix Jump">
+        <div class="game-name">Helix Jump</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/fnaf.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/JKWVjXeNdM4/maxresdefault.jpg" alt="FNAF">
+        <div class="game-name">FNAF</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/fnaf-2.html', '_blank')">
+        <img src="https://i.ytimg.com/vi/JNNgQKlr77c/maxresdefault.jpg" alt="FNAF 2">
+        <div class="game-name">FNAF 2</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/moto-x3m-pool.html', '_blank')">
+        <img src="https://files.catbox.moe/pj4twt.png" alt="Moto X3M Pool">
+        <div class="game-name">Moto X3M Pool</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/moto-x3m.html', '_blank')">
+        <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple1/v4/b8/74/9f/b8749f28-9ff1-2fc2-b7f2-9428abd40fda/mzl.jiqtfguw.png/1200x600wa.png" alt="Moto X3M">
+        <div class="game-name">Moto X3M</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/among-us.html', '_blank')">
+        <img src="https://gaming-cdn.com/images/products/7522/616x353/among-us-pc-game-steam-cover.jpg?v=1715242071" alt="Among Us">
+        <div class="game-name">Among Us</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/rocket-soccer.html', '_blank')">
+        <img src="https://us-west-2-epicgames.graphassets.com/A0Gpf4ZpfQzaTePr3NRc1z/resize=fit:clip,height:1080,width:1920/output=format:webp/2FE6uJltT6WKtdIEG2rc" alt="Rocket Soccer">
+        <div class="game-name">Rocket Soccer</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/ovo.html', '_blank')">
+        <img src="https://files.catbox.moe/8g58ni.png" alt="Ovo">
+        <div class="game-name">Ovo</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/knife-hit.html', '_blank')">
+        <img src="https://files.catbox.moe/yiwjfc.png" alt="Knife Hit">
+        <div class="game-name">Knife Hit</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/sky-race-3d.html', '_blank')">
+        <img src="https://files.catbox.moe/9efq0t.png" alt="Sky Race 3D">
+        <div class="game-name">Sky Race 3D</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/slope.html', '_blank')">
+        <img src="https://files.catbox.moe/kod1r6.png" alt="Slope">
+        <div class="game-name">Slope</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/poly-track.html', '_blank')">
+        <img src="https://files.catbox.moe/2ho4bb.png" alt="poly track">
+        <div class="game-name">poly track</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/cod-zombies.html', '_blank')">
+        <img src="https://files.catbox.moe/4qe4nk.jpeg" alt="COD Zombies">
+        <div class="game-name">COD Zombies</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/2dcsgo.html', '_blank')">
+        <img src="https://files.catbox.moe/f2uzj5.jpeg" alt="2dCSGO">
+        <div class="game-name">2dCSGO</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/cod-knockoff.html', '_blank')">
+        <img src="https://files.catbox.moe/2z5jxi.jpeg" alt="CODKNOCK">
+        <div class="game-name">CODKNOCK</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/tiny-fishing.html', '_blank')">
+        <img src="https://files.catbox.moe/s7a2jp.jpeg" alt="Tiny Fishing">
+        <div class="game-name">Tiny Fishing</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/eggy-car.html', '_blank')">
+        <img src="https://files.catbox.moe/b8df7a.jpeg" alt="Eggy Car">
+        <div class="game-name">Eggy Car</div>
+    </div>
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/sm64.html', '_blank')">
+        <img src="https://files.catbox.moe/wkj4s5.jpeg" alt="Super Mario 64">
+        <div class="game-name">Super Mario 64</div>
+    </div>
+</div>
+<div class="rectangle-container">
+    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/Mariokart-SC.html', '_blank')">
+        <img src="https://files.catbox.moe/ywad53.jpeg" alt="Mariokart Super Circut">
+        <div class="game-name">Mariokart Super Circut</div>
     </div>
 
-    <div class="icons-container">
-        <div class="icon-container" onclick="window.open('https://poygame.netlify.app/g.html', '_blank')">
-            <img class="icon" src="https://files.catbox.moe/679cnj.jpg">
-            <div class="icon-label">Library Games</div>
-        </div>
-        <div class="icon-container" onclick="window.open('https://poygame.netlify.app/a.html', '_blank')">
-            <img class="icon" src="https://files.catbox.moe/uoy2tl.webp">
-            <div class="icon-label">Other tools</div>
-        </div>
-        <div class="icon-container" onclick="window.open('https://poygame.netlify.app/e.html', '_blank')">
-            <img class="icon" src="https://files.catbox.moe/679cnj.jpg">
-            <div class="icon-label">Contacts</div>
-        </div>
-        <div class="icon-container" onclick="window.open('https://poygame.netlify.app/disremake.html', '_blank')">
-            <img class="icon" src="https://files.catbox.moe/xyywkl.png">
-            <div class="icon-label">Chat Online</div>
-        </div>
-    </div>
-
-    <div class="support-text" onclick="window.open('Nothing.com', '_blank')">Poy 2025</div>
-
-    <div class="update-text">PoyGames Website By Wisnu</div>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 100, "density": { "enable": false } },
+                "color": { "value": "#aaa" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 4, "random": true },
+                "move": { "enable": true, "speed": 8, "direction": "random" }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "repulse" } }
+            }
+        });
+    </script>
 </body>
 </html>
-
