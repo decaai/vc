@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Putar Video Acak 9:16</title>
+    <style>
+        /* Styling untuk menjaga rasio 9:16 */
+        #video-container {
+            width: 560px; /* Lebar 9:16 */
+            height: 1000px; /* Tinggi 9:16 */
+            margin: 0 auto; /* Pusatkan container */
+        }
+        
+        /* Styling untuk elemen video */
+        video {
+            width: 100%; /* Isi lebar container */
+            height: 100%; /* Isi tinggi container */
+        }
+    </style>
+</head>
+<body>
+    <h1>PoyreGames</h1>
+    <!-- Tempat untuk menampilkan video -->
+    <div id="video-container">
+        <video controls>
+            <!-- Video akan diputar di sini -->
+        </video>
+    </div>
+
+    <script>
+        // Daftar URL video yang ingin diputar secara acak
+        const videoUrls = [
+     'https://c.top4top.io/m_1966r6dd91.mp4',
+'https://j.top4top.io/m_1966jbfiw1.mp4',
+'https://g.top4top.io/m_1930fmx330.mp4',
+'https://g.top4top.io/m_19663sb841.mp4',
+'https://c.top4top.io/m_1966r6dd91.mp4',
+'https://e.top4top.io/m_1966e1oak1.mp4',
+'https://i.top4top.io/m_1930w6lwf0.mp4',
+'https://g.top4top.io/m_19667cggu1.mp4',
+'https://i.top4top.io/m_1931a0z6o0.mp4',
+'https://c.top4top.io/m_19661r7dt1.mp4',
+'https://f.top4top.io/m_1931lw9381.mp4',
+'https://i.top4top.io/m_1931cc22w1.mp4',
+'https://l.top4top.io/m_196632pm21.mp4',
+'https://j.top4top.io/m_1966ot1sc1.mp4',
+'https://k.top4top.io/m_1966owgko1.mp4',
+	   ];
+
+        // Pilih URL video secara acak
+        const indexAcak = Math.floor(Math.random() * videoUrls.length);
+        const videoUrlAcak = videoUrls[indexAcak];
+
+        // Menampilkan video acak dengan src yang dipilih
+        const videoElement = document.querySelector('video');
+        videoElement.src = videoUrlAcak;
+    </script>
+</body>
+</html>
