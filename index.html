@@ -605,26 +605,547 @@
         <div class="game-name">Super Mario 64</div>
     </div>
 </div>
-<div class="rectangle-container">
-    <div class="rectangle" onclick="window.open('https://poygame.netlify.app/g/Mariokart-SC.html', '_blank')">
-        <img src="https://files.catbox.moe/ywad53.jpeg" alt="Mariokart Super Circut">
-        <div class="game-name">Mariokart Super Circut</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoyreGames // CYBERPUNK_EDITION</title>
+    <link rel="icon" href="https://files.catbox.moe/td7os6.jpg" type="image/png">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SZN69N4SEF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SZN69N4SEF');
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- [ MODIFIED CSS: CYBERPUNK & PIXEL THEME ] --- */
+        :root {
+            --bg-deep-space: #0a0a18;
+            --bg-cyber-void: #141424;
+            --cyber-cyan: #00f2ea;
+            --cyber-magenta: #ff00c1;
+            --cyber-yellow: #fcee0a;
+            --text-glow: #e6e6ff;
+            --border-glitch: rgba(0, 242, 234, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-deep-space) url('https://files.catbox.moe/uer54d.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: multiply; /* Memberi nuansa gelap pada background */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-glow);
+            font-family: 'VT323', monospace; /* FONT PIXEL */
+            opacity: 0;
+            animation: fadeIn 1s 0.5s ease-in forwards;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        /* EFEK SCANLINE CRT PADA SELURUH LAYAR */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, #0000 0%, #0003 1px, #fff1 2px, #fff1 3px);
+            pointer-events: none;
+            z-index: 5;
+            animation: flicker 0.1s infinite;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        @keyframes flicker {
+            0% { opacity: 0.9; }
+            50% { opacity: 1; }
+            100% { opacity: 0.9; }
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* DECORATIVE GRID DI LATAR BELAKANG */
+        .classGrid {
+            display: grid;
+            justify-content: center;
+            grid-gap: 2px;
+            grid-template-columns: repeat(21, 20px);
+            grid-template-rows: repeat(7, 20px);
+            position: fixed; /* Diubah menjadi fixed */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.3;
+        }
+        .classGrid > div {
+            background: var(--bg-cyber-void);
+            border: 1px solid var(--border-glitch);
+            transition: background-color 0.3s;
+        }
+        .classGrid > div.selected {
+            animation: grid-anim 5s linear infinite;
+        }
+
+        @keyframes grid-anim {
+            0%   { background-color: var(--cyber-cyan); }
+            25%  { background-color: var(--cyber-magenta); }
+            50%  { background-color: var(--cyber-yellow); }
+            75%  { background-color: var(--cyber-magenta); }
+            100% { background-color: var(--cyber-cyan); }
+        }
+
+        /* --- Main Content Styling --- */
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title {
+            margin-top: 50px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(2rem, 5vw, 3rem); /* Ukuran font responsif */
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--cyber-cyan);
+            text-shadow: 0 0 5px var(--cyber-cyan), 0 0 10px var(--cyber-cyan), 0 0 20px var(--cyber-magenta), 0 0 40px var(--cyber-magenta);
+            text-align: center;
+            animation: text-glitch 2s infinite linear;
+            margin-bottom: 20px;
+        }
+
+        @keyframes text-glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .search-bar {
+            width: 100%;
+            background: transparent;
+            border: 2px solid var(--cyber-cyan);
+            outline: none;
+            color: var(--text-glow);
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            padding: 10px 15px;
+            box-shadow: 0 0 10px var(--cyber-cyan), inset 0 0 10px var(--cyber-cyan);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+        }
+        .search-bar::placeholder {
+            color: var(--border-glitch);
+        }
+
+        .icons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            background-color: var(--bg-cyber-void);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px var(--cyber-magenta);
+            border: 2px solid var(--cyber-magenta);
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+        .icon-container:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--cyber-magenta);
+        }
+        .icon {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        #game-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+
+        .rectangle {
+            background-color: var(--bg-cyber-void);
+            border: 2px solid var(--border-glitch);
+            box-shadow: 0 0 10px var(--border-glitch);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            aspect-ratio: 16 / 10; /* Rasio aspek yang konsisten */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: stagger-in 0.5s forwards;
+            clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+        }
+        .rectangle:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 0 25px var(--cyber-cyan);
+            border-color: var(--cyber-cyan);
+        }
+
+        @keyframes stagger-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .rectangle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s, transform 0.3s;
+        }
+        .rectangle:hover img {
+            filter: brightness(0.4);
+            transform: scale(1.1);
+        }
+
+        .game-name {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            color: var(--cyber-yellow);
+            text-shadow: 0 0 5px var(--cyber-yellow);
+            transform: translateY(10px);
+        }
+        .rectangle:hover .game-name {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer {
+            width: 100%;
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 1.2rem;
+            color: var(--border-glitch);
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="classGrid">
+        </div>
+
+    <div class="content-wrapper">
+        <div class="title">PoyreGames</div>
+        
+        <div class="search-container">
+            <input type="text" id="search-bar-input" class="search-bar" onkeyup="handleSearch(event)">
+        </div>
+        
+        <div class="icons">
+            <a href="https://poygame.netlify.app/a.html" target="_blank" class="icon-container">
+                <img src="https://files.catbox.moe/uoy2tl.webp" alt="Tools" class="icon">
+            </a>
+        </div>
+
+        <div id="game-grid-container">
+            </div>
     </div>
 
+    <div class="footer">Created By Wisnu</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
     <script>
+    // --- [ MODIFIED JAVASCRIPT: REFACTORED & ENHANCED ] ---
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DATA GAME: Lebih mudah dikelola ---
+        const gameData = [
+            { name: "subway surfers", img: "https://files.catbox.moe/nlz4zw.jpeg", url: "https://poygame.netlify.app/g/subway-surfers.html" },
+            { name: "minecraft", img: "https://gaming-cdn.com/images/news/articles/7191/cover/minecraft-gets-a-new-artwork-cover66856ea7d02ad.jpg", url: "https://poygame.netlify.app/g/minecraft.html" },
+            { name: "block blast", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDbz7CYwoe4wulDfOJ5Z5sUZOCiX0QfzRhqQ&s", url: "https://poygame.netlify.app/g/block-blast.html" },
+            { name: "Fruit Ninja", img: "https://preteen-ministry.net/cdn/shop/products/Fruit_Ninja_-_Cover_1024x.jpg?v=1507262323", url: "https://poygame.netlify.app/g/fruit-ninja.html" },
+            { name: "Crossy Road", img: "https://static1.squarespace.com/static/5e3bb512203ccf3516032e33/t/616f889f61fabc726422fa0c/1634699424702/CR_AndroidTV_01.png", url: "https://poygame.netlify.app/g/crossy-road.html" },
+            { name: "Monkey Mart", img: "https://files.catbox.moe/xfim7j.jpeg", url: "https://poygame.netlify.app/g/monkey-mart.html" },
+            { name: "Lazy Jump 3D", img: "https://play-lh.googleusercontent.com/49tmTkafs_EYS--F6LA83IsiTGqjwhfayLuNACFlMM-EDhOJO4ijMa_3jhWl9aee4Q", url: "https://poygame.netlify.app/g/lazy-jump-3d.html" },
+            { name: "Bubble Shooter", img: "https://i.ytimg.com/vi/npfxxsxj_ho/maxresdefault.jpg", url: "https://poygame.netlify.app/g/bubble-shooter.html" },
+            { name: "Stair Race 3D", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0jI9UiKYmsYw6malhXwMKmrZLb8lf-ni4WqhhIdXbBXqa3h3hnGeUYiWrIoVIHCWPkkaRcCZxXc__3ULMJwLVy-OeVZEdfjr00AX2Dig3qEKDeDD2huF9w8Bf_ial889CrhLh9fs60_5tnEKRbUyr_AxKytDnUElO9gKFI591cKKigI-t8WP1VY7NCQ/w1280-h720-p-k-no-nu/Stair%20Race%203D%20.jpg", url: "https://poygame.netlify.app/g/stair-race-3d.html" },
+            { name: "Granny Offline", img: "https://files.catbox.moe/k11vfr.webp", url: "https://poygame.netlify.app/g/granny-offline.html" },
+            { name: "Granny 2", img: "https://i.ytimg.com/vi/M2oAjzvjljw/maxresdefault.jpg", url: "https://poygame.netlify.app/g/granny-2.html" },
+            { name: "Baldi's Basics", img: "https://i.ytimg.com/vi/EmyYCa_BC9s/maxresdefault.jpg", url: "https://poygame.netlify.app/g/baldis-basics.html" },
+            { name: "1v1 LOL", img: "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs2/200042732/original/024f8a22e06d58c1eed316a539687253e49625c1/ill-edit-your-1v1-lol-videos-and-give-you-thumbnails.jpg", url: "https://poygame.netlify.app/g/1v1-lol.html" },
+            { name: "Paper Io 2", img: "https://files.catbox.moe/6mkaql.jpeg", url: "https://poygame.netlify.app/g/paper-io-2.html" },
+            { name: "Super Hot", img: "https://i.ytimg.com/vi/bkzwi0Y-mWk/maxresdefault.jpg", url: "https://poygame.netlify.app/g/super-hot.html" },
+            { name: "Basket Random", img: "https://play-lh.googleusercontent.com/6AN9KKe5M9udzoQA1J00dc6po5dNY9JInI_ewDKcPXocPjEHWTqJV0d2CwSWxYRhTh4=w526-h296-rw", url: "https://poygame.netlify.app/g/basket-random.html" },
+            { name: "Drift Hunters", img: "https://i.ytimg.com/vi/xjdLbUxmV_o/maxresdefault.jpg", url: "https://poygame.netlify.app/g/drift-hunters.html" },
+            { name: "Drift Boss", img: "https://files.catbox.moe/jsm5jl.jpeg", url: "https://poygame.netlify.app/g/drift-boss.html" },
+            { name: "Roblox Only Up", img: "https://i.ytimg.com/vi/iWQTsM7fbkg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCHSqTpwti_EaS_Aj1PQJc84C5qqA", url: "https://poygame.netlify.app/g/roblox-only-up.html" },
+            { name: "Minecraft Parkour", img: "https://i.ytimg.com/vi/zuyYcuDpCxs/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBH8p_cirtAcNNcst20Om5JkP2o6w", url: "https://poygame.netlify.app/g/minecraft-parkour.html" },
+            { name: "Drive Mad", img: "https://i.ytimg.com/vi/Bx3bt6HnOSs/hq720.jpg?sqp=-oaymwExCK4FEIIDSFryq4qpAyMIARUAAIhCGAHwAQH4Ab4HgALQBYoCDAgAEAEYMiBnKHIwDw==&rs=AOn4CLBvQgoYjUrnam3ck28CT-S_vlX_mQ", url: "https://poygame.netlify.app/g/drive-mad.html" },
+            { name: "Shell Shockers", img: "https://staticg.sportskeeda.com/editor/2024/10/783ff-17280361172197-1920.jpg?w=640", url: "https://poygame.netlify.app/g/shell-shockers.html" },
+            { name: "Ultimate Driving Simulator", img: "https://files.catbox.moe/lnxk6l.jpeg", url: "https://poygame.netlify.app/g/ultimate-driving-simulator.html" },
+            { name: "Hole.io", img: "https://lh3.googleusercontent.com/kdoWsI9fctfXqwInmRRn57jqohctanZvPrGIQIPxh-JPcMlK-U2Q3WgOJV2uHj0io1avUi2UTE_7mfFsjqjgT9xI=s1280-w1280-h800", url: "https://poygame.netlify.app/g/hole-io.html" },
+            { name: "Geometry Dash", img: "https://images3.alphacoders.com/120/thumb-1920-1202615.jpg", url: "https://poygame.netlify.app/g/geometry-dash.html" },
+            { name: "Basketball Stars", img: "https://play-lh.googleusercontent.com/WReGOclxXI481lMXvvAP8VGxSywci4vy-KmrZLKDeVO0ewmCZPzRzbAIVls-qwFzEw=w526-h296-rw", url: "https://poygame.netlify.app/g/basketball-stars.html" },
+            { name: "Slither.io", img: "https://files.catbox.moe/jz2zkq.png", url: "https://poygame.netlify.app/g/slither-io.html" },
+            { name: "Snowball.io", img: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8b/29/7c/8b297c9a-14ee-8271-5615-4b96f1838b6d/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/1200x600wa.png", url: "https://poygame.netlify.app/g/snowball-io.html" },
+            { name: "Retro Bowl", img: "https://files.catbox.moe/0k3fg4.png", url: "https://poygame.netlify.app/g/retro-bowl.html" },
+            { name: "Just Fall.io", img: "https://files.catbox.moe/zw4hua.png", url: "https://poygame.netlify.app/g/just-fall-io.html" },
+            { name: "Gladihoppers", img: "https://i.ytimg.com/vi/_kuLMGMoGAY/maxresdefault.jpg", url: "https://poygame.netlify.app/g/gladihoppers.html" },
+            { name: "Ragdoll.io", img: "https://files.catbox.moe/2vqace.png", url: "https://poygame.netlify.app/g/ragdoll-io.html" },
+            { name: "Temple Run 2", img: "https://i.ytimg.com/vi/9aK2zoFBbKY/maxresdefault.jpg", url: "https://poygame.netlify.app/g/temple-run-2.html" },
+            { name: "Stickman Hook", img: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ae/ed/22/aeed22b9-6b86-34ef-7464-af1657d2d5f7/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/1200x600wa.png", url: "https://poygame.netlify.app/g/stickman-hook.html" },
+            { name: "Flappy Bird", img: "https://mir-s3-cdn-cf.behance.net/projects/404/c4b80d143006427.Y3JvcCw4NjksNjgwLDI1LDA.png", url: "https://poygame.netlify.app/g/flappy-bird.html" },
+            { name: "Minecraft Shooter", img: "https://i.ytimg.com/vi/k_wBPps8fMA/maxresdefault.jpg", url: "https://poygame.netlify.app/g/minecraft-shooter.html" },
+            { name: "Helix Jump", img: "https://files.catbox.moe/64wqaw.png", url: "https://poygame.netlify.app/g/helix-jump.html" },
+            { name: "FNAF", img: "https://i.ytimg.com/vi/JKWVjXeNdM4/maxresdefault.jpg", url: "https://poygame.netlify.app/g/fnaf.html" },
+            { name: "FNAF 2", img: "https://i.ytimg.com/vi/JNNgQKlr77c/maxresdefault.jpg", url: "https://poygame.netlify.app/g/fnaf-2.html" },
+            { name: "Moto X3M Pool", img: "https://files.catbox.moe/pj4twt.png", url: "https://poygame.netlify.app/g/moto-x3m-pool.html" },
+            { name: "Moto X3M", img: "https://is1-ssl.mzstatic.com/image/thumb/Purple1/v4/b8/74/9f/b8749f28-9ff1-2fc2-b7f2-9428abd40fda/mzl.jiqtfguw.png/1200x600wa.png", url: "https://poygame.netlify.app/g/moto-x3m.html" },
+            { name: "Among Us", img: "https://gaming-cdn.com/images/products/7522/616x353/among-us-pc-game-steam-cover.jpg?v=1715242071", url: "https://poygame.netlify.app/g/among-us.html" },
+            { name: "Rocket Soccer", img: "https://us-west-2-epicgames.graphassets.com/A0Gpf4ZpfQzaTePr3NRc1z/resize=fit:clip,height:1080,width:1920/output=format:webp/2FE6uJltT6WKtdIEG2rc", url: "https://poygame.netlify.app/g/rocket-soccer.html" },
+            { name: "Ovo", img: "https://files.catbox.moe/8g58ni.png", url: "https://poygame.netlify.app/g/ovo.html" },
+            { name: "Knife Hit", img: "https://files.catbox.moe/yiwjfc.png", url: "https://poygame.netlify.app/g/knife-hit.html" },
+            { name: "Sky Race 3D", img: "https://files.catbox.moe/9efq0t.png", url: "https://poygame.netlify.app/g/sky-race-3d.html" },
+            { name: "Slope", img: "https://files.catbox.moe/kod1r6.png", url: "https://poygame.netlify.app/g/slope.html" },
+            { name: "poly track", img: "https://files.catbox.moe/2ho4bb.png", url: "https://poygame.netlify.app/g/poly-track.html" },
+            { name: "COD Zombies", img: "https://files.catbox.moe/4qe4nk.jpeg", url: "https://poygame.netlify.app/g/cod-zombies.html" },
+            { name: "2dCSGO", img: "https://files.catbox.moe/f2uzj5.jpeg", url: "https://poygame.netlify.app/g/2dcsgo.html" },
+            { name: "CODKNOCK", img: "https://files.catbox.moe/2z5jxi.jpeg", url: "https://poygame.netlify.app/g/cod-knockoff.html" },
+            { name: "Tiny Fishing", img: "https://files.catbox.moe/s7a2jp.jpeg", url: "https://poygame.netlify.app/g/tiny-fishing.html" },
+            { name: "Eggy Car", img: "https://files.catbox.moe/b8df7a.jpeg", url: "https://poygame.netlify.app/g/eggy-car.html" },
+            { name: "Super Mario 64", img: "https://files.catbox.moe/wkj4s5.jpeg", url: "https://poygame.netlify.app/g/sm64.html" },
+            { name: "Mariokart Super Circut", img: "https://files.catbox.moe/ywad53.jpeg", url: "https://poygame.netlify.app/g/Mariokart-SC.html" },
+        ];
+
+        const gameGridContainer = document.getElementById('game-grid-container');
+
+        // --- Fungsi untuk merender kartu game ---
+        function renderGames(gamesToRender) {
+            gameGridContainer.innerHTML = ''; // Kosongkan grid
+            gamesToRender.forEach((game, index) => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'rectangle';
+                gameCard.style.animationDelay = `${index * 0.05}s`;
+                gameCard.onclick = () => window.open(game.url, '_blank');
+
+                const gameImage = document.createElement('img');
+                gameImage.src = game.img;
+                gameImage.alt = game.name;
+                // Fallback untuk gambar yang error
+                gameImage.onerror = function() { this.src = 'https://files.catbox.moe/uer54d.jpg'; };
+
+                const gameName = document.createElement('div');
+                gameName.className = 'game-name';
+                gameName.textContent = game.name;
+
+                gameCard.appendChild(gameImage);
+                gameCard.appendChild(gameName);
+                gameGridContainer.appendChild(gameCard);
+            });
+        }
+
+        // --- Inisialisasi Particles.js dengan gaya Cyberpunk ---
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 100, "density": { "enable": false } },
-                "color": { "value": "#aaa" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": true },
-                "size": { "value": 4, "random": true },
-                "move": { "enable": true, "speed": 8, "direction": "random" }
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "edge", "stroke": { "width": 0, "color": "#000000" } },
+                "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 2, "random": true, "anim": { "enable": false } },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ff00c1", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 4, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
             },
             "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "repulse" } }
-            }
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
         });
+
+        // --- Inisialisasi Decorative Grid ---
+        const gridContainer = document.querySelector('.classGrid');
+        const totalGridCells = 21 * 7;
+        const selectedCellsOriginal = [22, 24, 26, 27, 28, 30, 33, 37, 38, 39, 42, 44, 46, 49, 53, 55, 57, 60, 61, 62, 64, 65, 66, 68, 71, 75, 77, 79, 82, 86, 88, 90, 93, 94, 95, 97, 98, 99, 101, 102, 103, 105, 106, 107];
+        for (let i = 0; i < totalGridCells; i++) {
+            const cell = document.createElement('div');
+            if (selectedCellsOriginal.includes(i)) {
+                cell.classList.add('selected');
+                cell.style.animationDelay = `${Math.random() * 5}s`;
+            }
+            gridContainer.appendChild(cell);
+        }
+        
+        // --- Efek Ketik untuk Search Bar ---
+        const searchInput = document.getElementById('search-bar-input');
+        const placeholderTexts = ["search games...", "e.g. minecraft", "e.g. subway surfers", "find your destiny//"];
+        let textIndex = 0;
+        let charIndex = 0;
+
+        function typePlaceholder() {
+            if (charIndex < placeholderTexts[textIndex].length) {
+                searchInput.placeholder += placeholderTexts[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typePlaceholder, 100);
+            } else {
+                setTimeout(erasePlaceholder, 2000);
+            }
+        }
+
+        function erasePlaceholder() {
+            if (charIndex > 0) {
+                searchInput.placeholder = placeholderTexts[textIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erasePlaceholder, 50);
+            } else {
+                textIndex = (textIndex + 1) % placeholderTexts.length;
+                setTimeout(typePlaceholder, 500);
+            }
+        }
+        
+        // --- Tampilkan semua game pada awal & mulai efek ---
+        renderGames(gameData);
+        setTimeout(typePlaceholder, 1500); // Mulai efek ketik setelah sedikit delay
+    });
+
+    // --- FUNGSI PENCARIAN (SEARCH) ---
+    function handleSearch(event) {
+        const searchTerm = event.target.value.toLowerCase();
+        const gameDataRef = [
+            { name: "subway surfers", img: "https://files.catbox.moe/nlz4zw.jpeg", url: "https://poygame.netlify.app/g/subway-surfers.html" },
+            { name: "minecraft", img: "https://gaming-cdn.com/images/news/articles/7191/cover/minecraft-gets-a-new-artwork-cover66856ea7d02ad.jpg", url: "https://poygame.netlify.app/g/minecraft.html" },
+            { name: "block blast", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDbz7CYwoe4wulDfOJ5Z5sUZOCiX0QfzRhqQ&s", url: "https://poygame.netlify.app/g/block-blast.html" },
+            { name: "Fruit Ninja", img: "https://preteen-ministry.net/cdn/shop/products/Fruit_Ninja_-_Cover_1024x.jpg?v=1507262323", url: "https://poygame.netlify.app/g/fruit-ninja.html" },
+            { name: "Crossy Road", img: "https://static1.squarespace.com/static/5e3bb512203ccf3516032e33/t/616f889f61fabc726422fa0c/1634699424702/CR_AndroidTV_01.png", url: "https://poygame.netlify.app/g/crossy-road.html" },
+            { name: "Monkey Mart", img: "https://files.catbox.moe/xfim7j.jpeg", url: "https://poygame.netlify.app/g/monkey-mart.html" },
+            { name: "Lazy Jump 3D", img: "https://play-lh.googleusercontent.com/49tmTkafs_EYS--F6LA83IsiTGqjwhfayLuNACFlMM-EDhOJO4ijMa_3jhWl9aee4Q", url: "https://poygame.netlify.app/g/lazy-jump-3d.html" },
+            { name: "Bubble Shooter", img: "https://i.ytimg.com/vi/npfxxsxj_ho/maxresdefault.jpg", url: "https://poygame.netlify.app/g/bubble-shooter.html" },
+            { name: "Stair Race 3D", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0jI9UiKYmsYw6malhXwMKmrZLb8lf-ni4WqhhIdXbBXqa3h3hnGeUYiWrIoVIHCWPkkaRcCZxXc__3ULMJwLVy-OeVZEdfjr00AX2Dig3qEKDeDD2huF9w8Bf_ial889CrhLh9fs60_5tnEKRbUyr_AxKytDnUElO9gKFI591cKKigI-t8WP1VY7NCQ/w1280-h720-p-k-no-nu/Stair%20Race%203D%20.jpg", url: "https://poygame.netlify.app/g/stair-race-3d.html" },
+            { name: "Granny Offline", img: "https://files.catbox.moe/k11vfr.webp", url: "https://poygame.netlify.app/g/granny-offline.html" },
+            { name: "Granny 2", img: "https://i.ytimg.com/vi/M2oAjzvjljw/maxresdefault.jpg", url: "https://poygame.netlify.app/g/granny-2.html" },
+            { name: "Baldi's Basics", img: "https://i.ytimg.com/vi/EmyYCa_BC9s/maxresdefault.jpg", url: "https://poygame.netlify.app/g/baldis-basics.html" },
+            { name: "1v1 LOL", img: "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs2/200042732/original/024f8a22e06d58c1eed316a539687253e49625c1/ill-edit-your-1v1-lol-videos-and-give-you-thumbnails.jpg", url: "https://poygame.netlify.app/g/1v1-lol.html" },
+            { name: "Paper Io 2", img: "https://files.catbox.moe/6mkaql.jpeg", url: "https://poygame.netlify.app/g/paper-io-2.html" },
+            { name: "Super Hot", img: "https://i.ytimg.com/vi/bkzwi0Y-mWk/maxresdefault.jpg", url: "https://poygame.netlify.app/g/super-hot.html" },
+            { name: "Basket Random", img: "https://play-lh.googleusercontent.com/6AN9KKe5M9udzoQA1J00dc6po5dNY9JInI_ewDKcPXocPjEHWTqJV0d2CwSWxYRhTh4=w526-h296-rw", url: "https://poygame.netlify.app/g/basket-random.html" },
+            { name: "Drift Hunters", img: "https://i.ytimg.com/vi/xjdLbUxmV_o/maxresdefault.jpg", url: "https://poygame.netlify.app/g/drift-hunters.html" },
+            { name: "Drift Boss", img: "https://files.catbox.moe/jsm5jl.jpeg", url: "https://poygame.netlify.app/g/drift-boss.html" },
+            { name: "Roblox Only Up", img: "https://i.ytimg.com/vi/iWQTsM7fbkg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCHSqTpwti_EaS_Aj1PQJc84C5qqA", url: "https://poygame.netlify.app/g/roblox-only-up.html" },
+            { name: "Minecraft Parkour", img: "https://i.ytimg.com/vi/zuyYcuDpCxs/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBH8p_cirtAcNNcst20Om5JkP2o6w", url: "https://poygame.netlify.app/g/minecraft-parkour.html" },
+            { name: "Drive Mad", img: "https://i.ytimg.com/vi/Bx3bt6HnOSs/hq720.jpg?sqp=-oaymwExCK4FEIIDSFryq4qpAyMIARUAAIhCGAHwAQH4Ab4HgALQBYoCDAgAEAEYMiBnKHIwDw==&rs=AOn4CLBvQgoYjUrnam3ck28CT-S_vlX_mQ", url: "https://poygame.netlify.app/g/drive-mad.html" },
+            { name: "Shell Shockers", img: "https://staticg.sportskeeda.com/editor/2024/10/783ff-17280361172197-1920.jpg?w=640", url: "https://poygame.netlify.app/g/shell-shockers.html" },
+            { name: "Ultimate Driving Simulator", img: "https://files.catbox.moe/lnxk6l.jpeg", url: "https://poygame.netlify.app/g/ultimate-driving-simulator.html" },
+            { name: "Hole.io", img: "https://lh3.googleusercontent.com/kdoWsI9fctfXqwInmRRn57jqohctanZvPrGIQIPxh-JPcMlK-U2Q3WgOJV2uHj0io1avUi2UTE_7mfFsjqjgT9xI=s1280-w1280-h800", url: "https://poygame.netlify.app/g/hole-io.html" },
+            { name: "Geometry Dash", img: "https://images3.alphacoders.com/120/thumb-1920-1202615.jpg", url: "https://poygame.netlify.app/g/geometry-dash.html" },
+            { name: "Basketball Stars", img: "https://play-lh.googleusercontent.com/WReGOclxXI481lMXvvAP8VGxSywci4vy-KmrZLKDeVO0ewmCZPzRzbAIVls-qwFzEw=w526-h296-rw", url: "https://poygame.netlify.app/g/basketball-stars.html" },
+            { name: "Slither.io", img: "https://files.catbox.moe/jz2zkq.png", url: "https://poygame.netlify.app/g/slither-io.html" },
+            { name: "Snowball.io", img: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8b/29/7c/8b297c9a-14ee-8271-5615-4b96f1838b6d/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/1200x600wa.png", url: "https://poygame.netlify.app/g/snowball-io.html" },
+            { name: "Retro Bowl", img: "https://files.catbox.moe/0k3fg4.png", url: "https://poygame.netlify.app/g/retro-bowl.html" },
+            { name: "Just Fall.io", img: "https://files.catbox.moe/zw4hua.png", url: "https://poygame.netlify.app/g/just-fall-io.html" },
+            { name: "Gladihoppers", img: "https://i.ytimg.com/vi/_kuLMGMoGAY/maxresdefault.jpg", url: "https://poygame.netlify.app/g/gladihoppers.html" },
+            { name: "Ragdoll.io", img: "https://files.catbox.moe/2vqace.png", url: "https://poygame.netlify.app/g/ragdoll-io.html" },
+            { name: "Temple Run 2", img: "https://i.ytimg.com/vi/9aK2zoFBbKY/maxresdefault.jpg", url: "https://poygame.netlify.app/g/temple-run-2.html" },
+            { name: "Stickman Hook", img: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ae/ed/22/aeed22b9-6b86-34ef-7464-af1657d2d5f7/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/1200x600wa.png", url: "https://poygame.netlify.app/g/stickman-hook.html" },
+            { name: "Flappy Bird", img: "https://mir-s3-cdn-cf.behance.net/projects/404/c4b80d143006427.Y3JvcCw4NjksNjgwLDI1LDA.png", url: "https://poygame.netlify.app/g/flappy-bird.html" },
+            { name: "Minecraft Shooter", img: "https://i.ytimg.com/vi/k_wBPps8fMA/maxresdefault.jpg", url: "https://poygame.netlify.app/g/minecraft-shooter.html" },
+            { name: "Helix Jump", img: "https://files.catbox.moe/64wqaw.png", url: "https://poygame.netlify.app/g/helix-jump.html" },
+            { name: "FNAF", img: "https://i.ytimg.com/vi/JKWVjXeNdM4/maxresdefault.jpg", url: "https://poygame.netlify.app/g/fnaf.html" },
+            { name: "FNAF 2", img: "https://i.ytimg.com/vi/JNNgQKlr77c/maxresdefault.jpg", url: "https://poygame.netlify.app/g/fnaf-2.html" },
+            { name: "Moto X3M Pool", img: "https://files.catbox.moe/pj4twt.png", url: "https://poygame.netlify.app/g/moto-x3m-pool.html" },
+            { name: "Moto X3M", img: "https://is1-ssl.mzstatic.com/image/thumb/Purple1/v4/b8/74/9f/b8749f28-9ff1-2fc2-b7f2-9428abd40fda/mzl.jiqtfguw.png/1200x600wa.png", url: "https://poygame.netlify.app/g/moto-x3m.html" },
+            { name: "Among Us", img: "https://gaming-cdn.com/images/products/7522/616x353/among-us-pc-game-steam-cover.jpg?v=1715242071", url: "https://poygame.netlify.app/g/among-us.html" },
+            { name: "Rocket Soccer", img: "https://us-west-2-epicgames.graphassets.com/A0Gpf4ZpfQzaTePr3NRc1z/resize=fit:clip,height:1080,width:1920/output=format:webp/2FE6uJltT6WKtdIEG2rc", url: "https://poygame.netlify.app/g/rocket-soccer.html" },
+            { name: "Ovo", img: "https://files.catbox.moe/8g58ni.png", url: "https://poygame.netlify.app/g/ovo.html" },
+            { name: "Knife Hit", img: "https://files.catbox.moe/yiwjfc.png", url: "https://poygame.netlify.app/g/knife-hit.html" },
+            { name: "Sky Race 3D", img: "https://files.catbox.moe/9efq0t.png", url: "https://poygame.netlify.app/g/sky-race-3d.html" },
+            { name: "Slope", img: "https://files.catbox.moe/kod1r6.png", url: "https://poygame.netlify.app/g/slope.html" },
+            { name: "poly track", img: "https://files.catbox.moe/2ho4bb.png", url: "https://poygame.netlify.app/g/poly-track.html" },
+            { name: "COD Zombies", img: "https://files.catbox.moe/4qe4nk.jpeg", url: "https://poygame.netlify.app/g/cod-zombies.html" },
+            { name: "2dCSGO", img: "https://files.catbox.moe/f2uzj5.jpeg", url: "https://poygame.netlify.app/g/2dcsgo.html" },
+            { name: "CODKNOCK", img: "https://files.catbox.moe/2z5jxi.jpeg", url: "https://poygame.netlify.app/g/cod-knockoff.html" },
+            { name: "Tiny Fishing", img: "https://files.catbox.moe/s7a2jp.jpeg", url: "https://poygame.netlify.app/g/tiny-fishing.html" },
+            { name: "Eggy Car", img: "https://files.catbox.moe/b8df7a.jpeg", url: "https://poygame.netlify.app/g/eggy-car.html" },
+            { name: "Super Mario 64", img: "https://files.catbox.moe/wkj4s5.jpeg", url: "https://poygame.netlify.app/g/sm64.html" },
+            { name: "Mariokart Super Circut", img: "https://files.catbox.moe/ywad53.jpeg", url: "https://poygame.netlify.app/g/Mariokart-SC.html" },
+        ];
+        const gameGridContainerRef = document.getElementById('game-grid-container');
+
+        const filteredGames = gameDataRef.filter(game => 
+            game.name.toLowerCase().includes(searchTerm)
+        );
+        
+        // --- Re-render game cards based on search result ---
+        gameGridContainerRef.innerHTML = ''; // Kosongkan grid
+        filteredGames.forEach((game, index) => {
+            const gameCard = document.createElement('div');
+            gameCard.className = 'rectangle';
+            gameCard.style.animationDelay = `${index * 0.05}s`;
+            gameCard.onclick = () => window.open(game.url, '_blank');
+
+            const gameImage = document.createElement('img');
+            gameImage.src = game.img;
+            gameImage.alt = game.name;
+            gameImage.onerror = function() { this.src = 'https://files.catbox.moe/uer54d.jpg'; };
+
+            const gameName = document.createElement('div');
+            gameName.className = 'game-name';
+            gameName.textContent = game.name;
+
+            gameCard.appendChild(gameImage);
+            gameCard.appendChild(gameName);
+            gameGridContainerRef.appendChild(gameCard);
+        });
+    }
     </script>
 </body>
 </html>
